@@ -1,79 +1,34 @@
-# Learning Bash
-
-![Header](https://github.com/v1ncenz0graw/headers/raw/main/BA%24H.png)
- ![GitHub Created At](https://img.shields.io/github/created-at/v1ncenz0graw/Learning-Bash-Notes-Projects)
-![GitHub last commit](https://img.shields.io/github/last-commit/v1ncenz0graw/Learning-Bash-Notes-Projects)
-
-
-## Overview
-
-This repository contains my **notes** and **projects** as I explore and learn Bash scripting. It serves as both a personal learning resource and a guide for others who want to start their journey with Bash from scratch.
-
----
+# Recording Name and Date
 
 ## Table of Contents
 
 - [Description](#overview)
 - [Getting Started](#getting-started)
-- [Notes](#notes)
-- [Projects](#projects)
-- [Used Resources](#used-resources)
 
+---
+## Description
+Write a script that does the following:
+
+1. Accepts two arguments on the command line and assigns them to variables. The first argument should be your first name, and the second should be your last name.
+2. Creates a new file named _output.txt_
+3. Writes the current date to _output.txt_ by using the _date_ command. (Bonus points if you can make the date command print the date in the DD-MM-YYYY format; use `#-> man date` to learn how this works.)
+4. Writes your full name to _output.txt_
+5. Makes a backup copy of _output.txt_, named _backup.txt_, using the _cp_ command. (Use _man cp_ if you aren’t sure of the command’s syntax.)
+6. Prints the content of the _output.txt_ file to the standard output stream.
+ 
 ---
 
 ## Getting Started
 
-This repository is organized to make learning and project management seamless:
-
-- **Notes and Learning Materials**: Located on the `main` branch, they include foundational concepts, examples, and explanations.
-- **Projects**: Each project is stored on its own dedicated branch. You can explore specific branches for hands-on examples and applications.
-
-### Clone the Repository
-
-To get started with this repository locally, clone it using the following command:
-
+1. Clone this branch:
 ```bash
-git clone https://github.com/v1ncenz0graw/Learning-Bash-Notes-Projects.git
+git clone --branch recording-name-and-date https://github.com/v1ncenz0graw/Learning-Bash-Notes-Projects.git
 ```
 
-Navigate to the repository folder:
-
+2. move into directory and run the _main.sh_
 ```bash
-cd Learning-Bash-Notes-Projects
+chmod u+x main.sh
+./main.sh <name> <surname>
+
+# Don't forget to change arguments with your own first and last name
 ```
-
-### Switch to a Specific Project Branch
-
-To access a particular project, switch to its corresponding branch:
-
-```bash
-git checkout <branch-name>
-```
-
-Replace `<branch-name>` with the name of the branch you want to explore.
-
-### Clone a Single Branch
-
-If you only want to clone a specific branch to save bandwidth:
-
-```bash
-git clone --branch <branch-name> https://github.com/v1ncenz0graw/Learning-Bash-Notes-Projects.git
-```
-
----
-## Notes
-- [1) Basics](1-Basics.md) 
-- [2) Flow Control and Text Processing](2-FC_TP.md)
-- 
----
-## Projects
-
-- **Under Development**  
-    Projects will be added soon as I progress in my learning journey.
-
----
-
-## Used Resources
-
-- **Under Development**  
-    A detailed list of references and learning materials will be included as the repository grows.
