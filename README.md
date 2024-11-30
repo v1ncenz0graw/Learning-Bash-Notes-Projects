@@ -22,7 +22,7 @@ Write a script that does the following:
 
 1. Clone this branch:
 ```bash
-git clone --branch recording-name-and-date https://github.com/v1ncenz0graw/Learning-Bash-Notes-Projects.git
+git clone --branch recording-name-and-date https://github.com/void-inject/Learning-Bash-Notes-Projects.git
 ```
 
 2. move into directory and run the _main.sh_
