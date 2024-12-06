@@ -4,6 +4,7 @@
 
 - [Description](#Description)
 - [Getting Started](#getting-started)
+- [Gmail Alerts](#gmail-alerts)
 
 ---
 ## Description
@@ -23,3 +24,20 @@ git clone --branch Alerts https://github.com/v1ncenz0graw/Learning-Bash-Notes-Pr
 ```bash
 chmod u+x *.sh
 ```
+
+## Gmail Alerts
+
+* Check if Postfix mail transfer agent exists on your Kali
+```bash
+postfix
+```
+(if agent doesn't exist download it. Check out [guide](guide.md))
+
+* After Successfully installing Agent, configure it to send mail properly. 
+	Checkout Postfix official [doc](https://www.postfix.org/documentation.html) or my [guide](guide.md)
+ 
+* Run:
+```bash
+./gmail.sh
+```
+
