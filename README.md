@@ -35,7 +35,9 @@ postfix
 
 * After Successfully installing Agent, configure it to send mail properly. 
 	Checkout Postfix official [doc](https://www.postfix.org/documentation.html) or my [guide](guide.md)
- 
+
+* change Sender and Recipient emails in script
+
 * Run:
 ```bash
 ./gmail.sh
