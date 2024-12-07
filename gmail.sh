@@ -1,67 +1,85 @@
 #!/usr/bin/env bash
 
-# Get the current date and time in HH:MM DD/MM/YYYY format
-DATE=$(date '+%H:%M %d/%m/%Y')
+# Function to display usage instructions
+usage() {
+    echo "Usage: $0 <TARGET> <KNOWN_HOSTS_FILE> <INTERFACE>"
+    echo "Example: $0 192.168.1.0/24 192-168-1-host.txt eth0"
+    echo
+    echo "Arguments:"
+    echo "  TARGET           The target subnet for ARP scan (e.g., 192.168.1.0/24)"
+    echo "  KNOWN_HOSTS_FILE Path to the file containing known host IPs"
+    echo "  INTERFACE        Network interface to use (e.g., eth0)"
+    exit 1
+}
 
-# File to store details of newly detected hosts
-NEW_HOSTS="172-16-10-new.txt"
-
-# File containing known hosts to compare against
-KNOWN_HOSTS="172-16-10-hosts.txt"
-
-# Network range to scan
-NETWORK="172.16.10.0/24"
-
-# Network interface to use for the ARP scan
-INTERFACE="br_public"
-
-# Email addresses for alerting
-FROM="" # Sender email
-TO=""   # Recipient email
-
-# Counters to track scan and detection iterations
-i=0 # Scan iteration counter
-k=0 # New host detection counter
-
-# Check if the file for storing new hosts exists and is writable, create it if not
-if [ ! -w "${NEW_HOSTS}" ]; then
-    touch ${NEW_HOSTS}
+# Check for required arguments
+if [[ $# -lt 3 ]]; then
+    echo "Error: Insufficient arguments provided."
+    usage
 fi
 
-# Start an infinite loop to continuously monitor the network
+# Input Arguments
+TARGET=$1     # Network to scan (e.g., 192.168.1.0/24)
+KNOWN_HOST=$2 # File containing a list of known hosts (IPs)
+INTERFACE=$3  # Network interface to use for the ARP scan
+
+# Derive NEW_HOSTS file name from KNOWN_HOSTS
+NEW_HOST="${KNOWN_HOST/host/new}"
+
+# Email notification settings (configure as needed):
+FROM="" # Sender email address (leave blank if not using notifications)
+TO=""   # Recipient email address (leave blank if not using notifications)
+
+# Initialize counters
+i=0 # Scan counter
+k=0 # New host counter per scan
+
+# Ensure the NEW_HOSTS file exists and is writable
+if [ ! -w "${NEW_HOST}" ]; then
+    touch "${NEW_HOST}" || {
+        echo "Failed to create ${NEW_HOST}"
+        exit 1
+    }
+fi
+
+# Main loop for periodic ARP scans
 while true; do
 
-    echo "Performing an ARP scan against ${NETWORK}..."
-    ((i++)) # Increment the scan iteration counter
+    # Increment scan counter and display a message
+    echo "Performing ARP scan #${i} against ${TARGET}"
+    ((i++))
 
-    # Run an ARP scan on the specified network and interface, and process each line of output
-    sudo arp-scan -x -I ${INTERFACE} ${NETWORK} | while read -r line; do
-
-        # Extract the IP address from the scan output
+    # Perform ARP scan using the specified network interface and target
+    sudo arp-scan -x -I "${INTERFACE}" "${TARGET}" | while read -r line; do
+        # Extract the IP address of the host from the scan output
         host=$(echo "${line}" | awk '{print $1}')
 
-        # Check if the detected host is already in the known hosts file
-        if ! grep -q "${host}" "${KNOWN_HOSTS}"; then
-            ((k++)) # Increment the new host detection counter
+        # Check if the host is already in the known hosts file
+        if ! grep -q "${host}" "${KNOWN_HOST}"; then
+            # Increment new host counter
+            ((k++))
+
+            # Log the new host with a timestamp
+            DATE=$(date '+%H:%M %d/%m/%Y') # Current timestamp
             echo "Found a new host: ${host}!"
+            echo "${i}.${k}: ${host} at ${DATE}" >>"${NEW_HOST}"
 
-            # Log the newly detected host to the NEW_HOSTS file
-            echo "${i}.${k}: ${host} at ${DATE}" >>${NEW_HOSTS}
-
-            # Send an email alert about the newly detected host
-            sendemail -f "${FROM}" \
-                -t "${TO}" \
-                -u "ARP Scan Notification" \
-                -m "A new host was found: ${host}"
+            # Send an email notification (if configured)
+            if [[ -n "${FROM}" && -n "${TO}" ]]; then
+                sendemail -f "${FROM}" \
+                    -t "${TO}" \
+                    -u "ARP Scan Notification" \
+                    -m "A new host was found: ${host} at ${DATE}" \
+                    -s smtp.example.com:587 -xu "username" -xp "password"
+            fi
         fi
-
     done
 
-    echo "No new host detected in this scan."
+    # Display a message if no new hosts were detected
+    echo "No new hosts detected in this scan."
 
-    # Wait for a random amount of time between 10 and 30 minutes before the next scan
+    # Sleep for a random time (10-30 minutes) before the next scan
     sleep_time=$((RANDOM % 20 + 10))
     echo "Sleeping for ${sleep_time} minutes..."
     sleep $((sleep_time * 60))
-
 done
