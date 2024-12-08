@@ -5,6 +5,7 @@
 - [Description](#Description)
 - [Getting Started](#getting-started)
 - [Gmail Alerts](#gmail-alerts)
+- [Telegram Alerts](#telegram-alerts)
 
 ---
 ## Description
