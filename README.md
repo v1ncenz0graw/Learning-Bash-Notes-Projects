@@ -21,7 +21,7 @@ Imagine that you want to be notified whenever a new host appears on the network.
 git clone --branch Alerts https://github.com/v1ncenz0graw/Learning-Bash-Notes-Projects.git
 ```
 
-2. move into directory and run the _main.sh_
+2. move into directory and make scripts executable
 ```bash
 chmod u+x *.sh
 ```
