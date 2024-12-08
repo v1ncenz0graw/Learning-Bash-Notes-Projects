@@ -31,10 +31,10 @@ chmod u+x *.sh
 ```bash
 postfix
 ```
-(if agent doesn't exist download it. Check out [guide](guide.md))
+(if agent doesn't exist download it)
 
 * After Successfully installing Agent, configure it to send mail properly. 
-	Checkout Postfix official [doc](https://www.postfix.org/documentation.html) or my [guide](guide.md)
+	Checkout Postfix official [doc](https://www.postfix.org/documentation.html)
 
 * change Sender and Recipient emails in script
 
