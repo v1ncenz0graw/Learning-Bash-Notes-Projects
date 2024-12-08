@@ -43,3 +43,11 @@ postfix
 ./gmail.sh 192.168.1.0/24 192-168-1-hosts.txt eth0
 ```
 
+## Telegram  Alerts
+
+- add you bot-token and chat-id to required places
+
+- Run
+```bash
+./telegram.sh 192.168.1.0/24 192-168-1-hosts.txt eth0
+```
