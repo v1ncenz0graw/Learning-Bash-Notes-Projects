@@ -40,6 +40,6 @@ postfix
 
 * Run:
 ```bash
-./gmail.sh
+./gmail.sh 192.168.1.0/24 192-168-1-hosts.txt eth0
 ```
 
