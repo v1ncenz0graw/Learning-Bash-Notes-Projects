@@ -1,82 +1,35 @@
-# Learning Bash
-
-![Header](https://github.com/void-inject/headers/raw/main/BA%24H.png)
- ![GitHub Created At](https://img.shields.io/github/created-at/void-inject/Learning-Bash-Notes-Projects)
-![GitHub last commit](https://img.shields.io/github/last-commit/void-inject/Learning-Bash-Notes-Projects)
-
-
-## Overview
-
-This repository contains my **notes** and **projects** as I explore and learn Bash scripting. It serves as both a personal learning resource and a guide for others who want to start their journey with Bash from scratch.
-
----
+# Recording Name and Date
 
 ## Table of Contents
 
-- [Description](#overview)
+- [Description](#Description)
 - [Getting Started](#getting-started)
-- [Notes](#notes)
-- [Projects](#projects)
-- [Used Resources](#used-resources)
+
+---
+## Description
+Sorting your scan results into categories of interest is often useful. For example, you could dump results for each IP address into a dedicated file or organize the results based on the versions of the software found.
+
+Write a script that does the following:
+
+- Runs Nmap against hosts in a file
+- Uses bash to create individual files whose filenames are open ports
+- In each file, writes the IP address on which the corresponding port was open
+
+At the end, you should have a bunch of files, such as port-22.txt, port-80.txt, and port-8080.txt, and in each file, you should see one or more IP addresses at which that port was found to be open. This can be useful when you have a large number of target hosts and want to attack them in clusters by targeting specific protocols associated with given ports.
 
 ---
 
 ## Getting Started
 
-This repository is organized to make learning and project management seamless:
-
-- **Notes and Learning Materials**: Located on the `main` branch, they include foundational concepts, examples, and explanations.
-- **Projects**: Each project is stored on its own dedicated branch. You can explore specific branches for hands-on examples and applications.
-
-### Clone the Repository
-
-To get started with this repository locally, clone it using the following command:
-
+1. Clone this branch:
 ```bash
-git clone https://github.com/void-inject/Learning-Bash-Notes-Projects.git
+git clone --branch ip-sorter https://github.com/v1ncenz0graw/Learning-Bash-Notes-Projects.git
 ```
 
-Navigate to the repository folder:
-
+2. move into directory and run the _main.sh_
 ```bash
-cd Learning-Bash-Notes-Projects
+chmod u+x main.sh
+./main.sh <ip-list>
+
+# Don't forget to change arguments with your own first and last name
 ```
-
-### Switch to a Specific Project Branch
-
-To access a particular project, switch to its corresponding branch:
-
-```bash
-git checkout <branch-name>
-```
-
-Replace `<branch-name>` with the name of the branch you want to explore.
-
-### Clone a Single Branch
-
-If you only want to clone a specific branch to save bandwidth:
-
-```bash
-git clone --branch <branch-name> https://github.com/void-inject/Learning-Bash-Notes-Projects.git
-```
-
----
-## Notes
-- [1) Basics](1-Basics.md) 
-- [2) Flow Control and Text Processing](2-FC_TP.md)
-- [3) Setting_Up](3-Setting_Up.md)
-- [4) Additional_Tools](4-Additional_Tools.md)
-- [5) Reconnaissance](5-Reconnaissance.md)
----
-## Projects
-
-- [1) Task](https://github.com/void-inject/Learning-Bash-Notes-Projects/tree/recording-name-and-date) 
-- [2) Ping](https://github.com/void-inject/Learning-Bash-Notes-Projects/tree/Ping)
-- [3) Alerts](https://github.com/void-inject/Learning-Bash-Notes-Projects/tree/Alerts)
-
----
-
-## Used Resources
-
-- **Under Development**  
-    A detailed list of references and learning materials will be included as the repository grows.
